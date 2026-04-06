@@ -34,6 +34,7 @@ public class ArrowFishingGame : MonoBehaviour
     public int MaxPatternLength = 8;
     public int MinPatternLength = 5;
     public float flashTime = 0.5f;
+    [SerializeField] private float waitBetweenFlashes = 0.25f;
 
     private bool isCollectingInput = false;
     private ArrowState[] playerPattern;
@@ -103,6 +104,7 @@ public class ArrowFishingGame : MonoBehaviour
                     // Flash the arrow to give feedback
                     GameObject arrow = getArrowFromState(input.Value);
                     StartCoroutine(FlashSingleArrow(arrow));
+                    arrow.GetComponent<SpriteRenderer>().sprite = arrowDefaultSprite;
 
                     // Check if pattern is complete
                     if (playerPatternIndex >= arrowPattern.Length)
@@ -122,7 +124,7 @@ public class ArrowFishingGame : MonoBehaviour
     void startArrowGame()
     {
         arrowPattern = GeneratePattern();
-        //HookEnabled(true);
+        HookEnabled(true);
         currentPatternIndex = 0;
         currentArrowState = arrowPattern[currentPatternIndex];
         StartCoroutine(FlashArrowPattern(arrowPattern));
@@ -177,6 +179,9 @@ public class ArrowFishingGame : MonoBehaviour
 
             // Restore original sprite
             spriteRenderer.sprite = originalSprite;
+
+            // Wait before next flash to ensure the reset is noticeable
+            yield return new WaitForSeconds(waitBetweenFlashes);
         }
 
         // After showing pattern, prompt player to enter it
@@ -250,6 +255,7 @@ public class ArrowFishingGame : MonoBehaviour
     {
         // Get a random fish from the container
         FishDataObj caughtFish = FishContainer.GetRandomFish();
+        fishSprite.GetComponent<SpriteRenderer>().sprite = caughtFish.FishSprite;
         if (caughtFish != null)
         {
             // Add it to player inventory
@@ -257,7 +263,7 @@ public class ArrowFishingGame : MonoBehaviour
             Debug.Log($"You caught a {caughtFish.FishName}!");
         }
 
-        //HookEnabled(false);
+        HookEnabled(false);
         ThrowVisualFish();
     }
 
