@@ -5,6 +5,8 @@ using System.Linq;
 public static class FishContainer
 {
     private static List<FishDataObj> allFishData;
+    //temp here
+    private static List<FishDataObj> playerFish;
 
     static FishContainer()
     {
@@ -40,8 +42,31 @@ public static class FishContainer
         return new List<FishDataObj>(allFishData);
     }
 
+    public static FishDataObj GetRandomFish()
+    {
+        return allFishData[Random.Range(0, allFishData.Count)];
+    }
+
     public static void Refresh()
     {
         LoadAllFish();
     }
+
+    public static FishDataObj GetPlayerFishByName(string name)
+    {
+        return allFishData.FirstOrDefault(f => f.FishName == name);
+    }
+
+    public static List<FishDataObj> GetAllPlayerFish()
+    {
+        return new List<FishDataObj>(allFishData);
+    }
+
+    public static void AddFishToPlayer(FishDataObj fishDataObj)
+    {
+        //check if less then 6 fish
+        playerFish.Add(fishDataObj);
+    }
+    
+    
 }

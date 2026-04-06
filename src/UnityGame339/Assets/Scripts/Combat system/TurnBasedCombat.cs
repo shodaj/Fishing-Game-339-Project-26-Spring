@@ -43,7 +43,7 @@ public class TurnBasedCombat : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        InitTurnBasedCombat(FishContainer.GetFishByName("Joe Fish"), FishContainer.GetFishByName("Evil fucking fish"));
+        InitTurnBasedCombat(FishContainer.GetRandomFish(), FishContainer.GetRandomFish());
     }
 
 
