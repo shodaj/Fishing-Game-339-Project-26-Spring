@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FishDataObj
   FishName: Evil fucking fish
   FishDescription: ate a baby
-  Health: -5
+  Health: 5
   AttackDamage: 1
   MaxHealth: 5
   Defence: 1
