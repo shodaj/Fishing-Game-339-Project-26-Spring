@@ -344,7 +344,7 @@ MonoBehaviour:
   arrowDefaultSprite: {fileID: -5535519688993350575, guid: 1baa996fac258366eaf2e554432f6022, type: 3}
   fishingRod: {fileID: 96903432}
   fishingHook: {fileID: 110637101}
-  fishSprite: {fileID: 0}
+  fishSprite: {fileID: 3590887374117049779, guid: a09c6173fbd133245859aa3a81b0ec75, type: 3}
   MaxPatternLength: 8
   MinPatternLength: 5
   flashTime: 0.5
