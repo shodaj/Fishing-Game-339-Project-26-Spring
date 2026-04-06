@@ -6,7 +6,7 @@ public static class FishContainer
 {
     private static List<FishDataObj> allFishData;
     //temp here
-    private static List<FishDataObj> playerFish;
+    private static List<FishDataObj> playerFish = new List<FishDataObj>();
 
     static FishContainer()
     {
@@ -64,8 +64,20 @@ public static class FishContainer
 
     public static void AddFishToPlayer(FishDataObj fishDataObj)
     {
+        if (playerFish == null)
+        {
+            playerFish = new List<FishDataObj>();
+        }
         //check if less then 6 fish
-        playerFish.Add(fishDataObj);
+        if (playerFish.Count < 6)
+        {
+            playerFish.Add(fishDataObj);
+            Debug.Log($"Added {fishDataObj.FishName} to player inventory. Total: {playerFish.Count}");
+        }
+        else
+        {
+            Debug.Log("Player inventory full!");
+        }
     }
     
     

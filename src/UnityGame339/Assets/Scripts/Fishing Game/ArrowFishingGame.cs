@@ -122,7 +122,7 @@ public class ArrowFishingGame : MonoBehaviour
     void startArrowGame()
     {
         arrowPattern = GeneratePattern();
-        HookEnabled(true);
+        //HookEnabled(true);
         currentPatternIndex = 0;
         currentArrowState = arrowPattern[currentPatternIndex];
         StartCoroutine(FlashArrowPattern(arrowPattern));
@@ -248,11 +248,17 @@ public class ArrowFishingGame : MonoBehaviour
 
     public void CatchFish()
     {
-        
-        HookEnabled(false);
+        // Get a random fish from the container
+        FishDataObj caughtFish = FishContainer.GetRandomFish();
+        if (caughtFish != null)
+        {
+            // Add it to player inventory
+            FishContainer.AddFishToPlayer(caughtFish);
+            Debug.Log($"You caught a {caughtFish.FishName}!");
+        }
+
+        //HookEnabled(false);
         ThrowVisualFish();
-        
-        
     }
 
     private void ThrowVisualFish()
