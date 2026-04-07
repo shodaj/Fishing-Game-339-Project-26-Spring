@@ -1958,9 +1958,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 659431826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62e4194c211d949f290651b55d66f7f9, type: 3}
+  m_Script: {fileID: 11500000, guid: a8927442a5b47bf4fac2eee3be2bf63b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopSceneChange
+  m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
+  sceneToLoad: Tutorial Island
 --- !u!1 &672994255
 GameObject:
   m_ObjectHideFlags: 0
