@@ -45,7 +45,7 @@ public class ShopManager : MonoBehaviour
             shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID]++; 
             
             // update coins after purchase
-            CointsText.text = "Coins:" + coins.ToString(); 
+            CointsText.text = "$" + coins.ToString(); 
             
             // update item quantity
             ButtonRef.GetComponent<ButtonInfo>().QuantityText.text = shopItems[3, ButtonRef.GetComponent<ButtonInfo>().ItemID].ToString();
