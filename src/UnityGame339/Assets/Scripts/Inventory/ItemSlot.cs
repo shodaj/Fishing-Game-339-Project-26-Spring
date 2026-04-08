@@ -1,5 +1,4 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
 
 public class ItemSlot : MonoBehaviour
@@ -13,7 +12,7 @@ public class ItemSlot : MonoBehaviour
     
     //===ITEM SLOT===
     [SerializeField]
-    private TMP_Text quantityText;
+    private Text quantityText;
     
     [SerializeField]
     private Image itemImage;
