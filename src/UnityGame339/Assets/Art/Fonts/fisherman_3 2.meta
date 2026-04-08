@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:src/UnityGame339/Assets/Art/Fonts/fisherman_3 2.meta
 guid: 486e8e94021684582a6610ad5ac55edc
+========
+guid: 37b6c2ad76cf890e08fa952d200749ac
+>>>>>>>> Sammy04:src/UnityGame339/Assets/Art/Map Assets/Fog.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

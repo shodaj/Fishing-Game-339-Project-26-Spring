@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:src/UnityGame339/Assets/Art/Tilemap Art/Tilemap Building Palette 2.png.meta
 guid: 748b52fc03db74c1e84791a51654598d
+========
+guid: a0a22ab5c9d4038c29518b69de8da026
+>>>>>>>> Sammy04:src/UnityGame339/Assets/Art/Map Assets/Fog/Fog_13.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
