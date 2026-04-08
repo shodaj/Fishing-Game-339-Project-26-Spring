@@ -24,9 +24,9 @@ public class ShopManager : MonoBehaviour
         shopItems[1, 3] = 3;
         
         // Prices
-        shopItems[2, 1] = 10;
-        shopItems[2, 2] = 20;
-        shopItems[2, 3] = 30;
+        shopItems[2, 1] = 8;
+        shopItems[2, 2] = 50;
+        shopItems[2, 3] = 20;
         
         // Quantity
         shopItems[3, 1] = 0;
@@ -35,9 +35,23 @@ public class ShopManager : MonoBehaviour
     } 
 
     
-    public void Buy(GameObject buttonObject)
+    public void Buy()
     {
+        GameObject buttonObject = UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject;
+
+        if (buttonObject == null)
+        {
+            Debug.Log("No Button Selected.");
+            return;
+        }
+        
         var info = buttonObject.GetComponent<Item>();
+
+        if (info == null)
+        {
+            Debug.Log("No Item Component Found On Button.");
+            return;
+        }
 
         int itemID = info.ItemID;
         

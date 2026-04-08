@@ -28,11 +28,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int quantity, Sprite sprite, int price)
+    public void AddItem(string itemName, int quantity, Sprite itemSprite, int price)
     {
-        Debug.Log("itemName = " + itemName + " quantity = " + quantity + " itemSprite = " + sprite + " price = " + price);
-        
-        
+        Debug.Log("itemName = " + itemName + " quantity = " + quantity + " itemSprite = " + itemSprite + " price = " + price);
+
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].isFull == false)
+            {
+                itemSlot[i].AddItem(itemName, quantity, itemSprite, price);
+                return;
+            }
+        }
     }
     
 }
