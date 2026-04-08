@@ -1,14 +1,20 @@
+
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game339.Shared.Services.Implementation;
 
 public class Player : MonoBehaviour
 {
     private SpriteRenderer playerSpriteRenderer;
     private SceneTransition _currentZone;
-
+    private PlayerInfo playerInfo;
+    
     void Awake()
     {
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerInfo.SetName("Larry");
+        playerInfo.SetAge(73);
     }
     
     public void Interact()

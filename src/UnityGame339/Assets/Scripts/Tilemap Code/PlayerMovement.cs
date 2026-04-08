@@ -1,8 +1,8 @@
 using UnityEngine;
+using Game339.Shared.Services.Implementation;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 5;
     public int facingDirection = 1;
     
     public Rigidbody2D rb;
@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("horizontal", Mathf.Abs(horizontal));
         animator.SetFloat("vertical", Mathf.Abs(vertical));
         
-        rb.linearVelocity = new Vector2(horizontal, vertical) * speed;
+        rb.linearVelocity = new Vector2(horizontal, vertical) * GameParameters.GetSpeed();
     }
 
     void Flip()
