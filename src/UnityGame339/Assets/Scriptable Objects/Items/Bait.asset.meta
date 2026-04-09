@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:src/UnityGame339/Assets/Scriptable Objects/Items/Bait.asset.meta
 guid: 9ea20c78c9c7442b49a38bb8d95e92a9
+=======
+guid: 9c2041d4e44e2e04984e7fee76c258a9
+>>>>>>> origin/main2:src/UnityGame339/Assets/Tile Assets/Map_tiles_0 2.asset.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 11400000
