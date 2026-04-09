@@ -10,10 +10,22 @@ public class Item : MonoBehaviour
     public Text NameText;
     public GameObject ShopManagerObj;
     
-    public string itemName;
-    public int quantity;
-    public int price;
-    public Sprite sprite;
+    //===INFO===
+    [SerializeField]
+    private string itemName;
+    
+    [SerializeField]
+    private int quantity;
+    
+    [SerializeField]
+    private int price;
+    
+    [SerializeField]
+    private Sprite sprite;
+    
+    [TextArea]
+    [SerializeField]
+    private string itemDescription;
     
     private InventoryManager inventoryManager;
   
@@ -28,8 +40,8 @@ public class Item : MonoBehaviour
         QuantityText.text = ShopManagerObj.GetComponent<ShopManager>().shopItems[3, ItemID].ToString();
     }
 
-    public void SendToInventory()
+    public void SendToInventory(int currentQuantity)
     {
-        inventoryManager.AddItem(itemName, quantity, sprite, price);
+        inventoryManager.AddItem(itemName, currentQuantity, sprite, price, itemDescription);
     }
 }

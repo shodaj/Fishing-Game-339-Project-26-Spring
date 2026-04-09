@@ -1,16 +1,12 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopSceneChange : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private string sceneToLoad;
+    
+    public void LoadScene()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        SceneManager.LoadScene(sceneToLoad);
     }
 }

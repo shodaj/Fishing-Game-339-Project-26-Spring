@@ -4,32 +4,85 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
-    
-    public List<Item> items = new List<Item>(); // tracks owned item ids
+    public ItemSlot[] itemSlot;
+    public ItemSO[] itemSOs;
 
-    private bool isActivated;
+    private bool isMenuActivated;
     
     void Update()
     {
         // Open Inventory with "Q"
-        if (Input.GetKeyDown(KeyCode.Q) && !isActivated)
+        if (Input.GetKeyDown(KeyCode.Q) && !isMenuActivated)
         {
             Time.timeScale = 0;
             InventoryMenu.SetActive(true);
-            isActivated = true;
+            isMenuActivated = true;
         }
         
-        else if (Input.GetKeyDown(KeyCode.Q) && isActivated)
+        else if (Input.GetKeyDown(KeyCode.Q) && isMenuActivated)
         {
             Time.timeScale = 1;
             InventoryMenu.SetActive(false);
-            isActivated = false;
+            isMenuActivated = false;
         }
     }
 
-    public void AddItem(string itemName, int quantity, Sprite sprite, int price)
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, 
+        int price, string itemDescription)
     {
-        Debug.Log("itemName = " + itemName + " quantity = " + quantity + " itemSprite = " + sprite + " price = " + price);
+        Debug.Log("itemName = " + itemName + " quantity = " + quantity + " itemSprite = " + itemSprite + 
+                  " price = " + price + " itemDescription = " + itemDescription);
+        
+        // stack into existing slot with same item
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].isFull == false && itemSlot[i].itemName == itemName)
+            {
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, price, itemDescription);
+
+                if (leftOverItems > 0)
+                {
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, price, itemDescription);
+                }
+                return leftOverItems;
+            }
+        }
+        // find empty slot
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].quantity == 0)
+            {
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, price, itemDescription);
+                
+                if (leftOverItems > 0) 
+                { 
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, price, itemDescription);
+                } 
+                return leftOverItems;
+            }
+            
+        }
+        
+        return quantity;
     }
-    
+
+    public void UseItem(string itemName)
+    {
+        for (int i = 0; i < itemSOs.Length; i++)
+        {
+            if (itemSOs[i].itemName == itemName)
+            {
+                itemSOs[i].UseItem();
+            }
+        }
+    }
+
+    public void DeselectAllSlots()
+    {
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            itemSlot[i].selectedShader.SetActive(false);
+            itemSlot[i].isItemSelected = false;
+        }
+    }
 }

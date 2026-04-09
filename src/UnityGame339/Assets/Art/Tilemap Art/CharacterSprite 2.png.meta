@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:src/UnityGame339/Assets/Art/Tilemap Art/CharacterSprite 2.png.meta
 guid: b684a3c144c1540ea87449d2d2098320
+========
+guid: 2609b2b9f851dabff9f68ad11711dcc9
+>>>>>>>> Sammy04:src/UnityGame339/Assets/Art/Map Assets/Fog/Fog_12.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:src/UnityGame339/Assets/Art/Temp/WoodTexture.jpg.meta
 guid: dad072fa6b0844c999318edf1626b46b
+========
+guid: 46dd23d8a217c123c90beb9251d7cfb9
+>>>>>>>> Sammy04:src/UnityGame339/Assets/Art/Map Assets/Fog/Fog_04.png.meta
 TextureImporter:
   internalIDToNameTable:
   - first:
