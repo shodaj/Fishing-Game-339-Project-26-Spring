@@ -5,8 +5,7 @@ public class InventoryManager : MonoBehaviour
 {
     public GameObject InventoryMenu;
     public ItemSlot[] itemSlot;
-    
-    public List<Item> items = new List<Item>(); // tracks owned item ids
+    public ItemSO[] itemSOs;
 
     private bool isMenuActivated;
     
@@ -28,18 +27,52 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int quantity, Sprite itemSprite, 
+    public int AddItem(string itemName, int quantity, Sprite itemSprite, 
         int price, string itemDescription)
     {
         Debug.Log("itemName = " + itemName + " quantity = " + quantity + " itemSprite = " + itemSprite + 
                   " price = " + price + " itemDescription = " + itemDescription);
-
+        
+        // stack into existing slot with same item
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (itemSlot[i].isFull == false)
+            if (itemSlot[i].isFull == false && itemSlot[i].itemName == itemName)
             {
-                itemSlot[i].AddItem(itemName, quantity, itemSprite, price, itemDescription);
-                return;
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, price, itemDescription);
+
+                if (leftOverItems > 0)
+                {
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, price, itemDescription);
+                }
+                return leftOverItems;
+            }
+        }
+        // find empty slot
+        for (int i = 0; i < itemSlot.Length; i++)
+        {
+            if (itemSlot[i].quantity == 0)
+            {
+                int leftOverItems = itemSlot[i].AddItem(itemName, quantity, itemSprite, price, itemDescription);
+                
+                if (leftOverItems > 0) 
+                { 
+                    leftOverItems = AddItem(itemName, leftOverItems, itemSprite, price, itemDescription);
+                } 
+                return leftOverItems;
+            }
+            
+        }
+        
+        return quantity;
+    }
+
+    public void UseItem(string itemName)
+    {
+        for (int i = 0; i < itemSOs.Length; i++)
+        {
+            if (itemSOs[i].itemName == itemName)
+            {
+                itemSOs[i].UseItem();
             }
         }
     }

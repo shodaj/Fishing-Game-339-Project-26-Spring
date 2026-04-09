@@ -2516,7 +2516,8 @@ MonoBehaviour:
   - {fileID: 1602622544}
   - {fileID: 73529586}
   - {fileID: 1297955964}
-  items: []
+  itemSOs:
+  - {fileID: 11400000, guid: 9ea20c78c9c7442b49a38bb8d95e92a9, type: 2}
 --- !u!1001 &717831998
 PrefabInstance:
   m_ObjectHideFlags: 0
