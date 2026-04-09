@@ -32,8 +32,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2260333765100060673}
-  - {fileID: 3879402970283532412}
   - {fileID: 1142361515228510099}
+  - {fileID: 3879402970283532412}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -95,9 +95,16 @@ MonoBehaviour:
   quantity: 0
   itemSprite: {fileID: 0}
   price: 0
+  itemDescription: 
   isFull: 0
+  emptySprite: {fileID: 21300000, guid: 176f4bc89d46d4bc985a2ef6ad3ba3ed, type: 3}
   quantityText: {fileID: 5287390707184064261}
   itemImage: {fileID: 6157389925555088785}
+  itemDescriptionImage: {fileID: 0}
+  itemDescriptionText: {fileID: 0}
+  itemDescriptionNameText: {fileID: 0}
+  selectedShader: {fileID: 7916078269705105786}
+  isItemSelected: 0
 --- !u!1 &2014069983546009122
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,7 +246,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 4b06e284b780449aabd36d4cc96662d0, type: 3}
     m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0

@@ -70,7 +70,7 @@ public class ShopManager : MonoBehaviour
             // update item quantity
             info.QuantityText.text = shopItems[3, itemID].ToString();
             
-            info.SendToInventory();
+            info.SendToInventory(shopItems[3, itemID]);
         }
         else
         {
