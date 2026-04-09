@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using Game339.Shared.Diagnostics;
+using Game.Runtime;
 
 public class TurnBasedCombat : MonoBehaviour
 {
+    private IGameLog _log;
     [SerializeField] private GameObject fighterPrefab;
     [SerializeField] private Transform playerSpawnPoint;
     [SerializeField] private Transform enemySpawnPoint;
@@ -43,6 +46,8 @@ public class TurnBasedCombat : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _log = ServiceResolver.Resolve<IGameLog>();
+        _log.Info("TurnBasedCombat initialized");
         InitTurnBasedCombat(FishContainer.GetRandomFish(), FishContainer.GetRandomFish());
     }
 
@@ -50,6 +55,7 @@ public class TurnBasedCombat : MonoBehaviour
 
     public void InitTurnBasedCombat(FishDataObj playerFish, FishDataObj enemyFish)
     {
+        _log.Info($"Initializing combat: Player={playerFish.FishName}, Enemy={enemyFish.FishName}");
         if (player == null)
         {
             player = Instantiate(fighterPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation);
@@ -132,11 +138,11 @@ public class TurnBasedCombat : MonoBehaviour
     private void OnParrySuccess()
     {
         parryStatusText.text = "Parried!";
-        Debug.Log("Parry Success!");
+        _log.Info("Parry Success!");
         // Reduce damage or take no damage
         // We'll call enemy attack now but with reduced effect or handle it here
         enemyFighter.TakeDamage(0); // For now, maybe reflect damage or just block
-        
+
         if (enemyFighter.fishData.Health <= 0)
         {
             OnPlayerWin();
@@ -146,10 +152,10 @@ public class TurnBasedCombat : MonoBehaviour
     private void OnParryFail(string message)
     {
         parryStatusText.text = message;
-        Debug.Log("Parry Fail: " + message);
+        _log.Warn("Parry Fail: " + message);
         playerFighter.TakeDamage(enemyFighter.GetFishDamage());
-        Debug.Log("Enemy did: " + enemyFighter.GetFishDamage() + " Damage. Player HP now: " + playerFighter.fishData.Health);
-        
+        _log.Info("Enemy did: " + enemyFighter.GetFishDamage() + " Damage. Player HP now: " + playerFighter.fishData.Health);
+
         if (playerFighter.fishData.Health <= 0)
         {
             OnPlayerLose();
@@ -186,7 +192,7 @@ public class TurnBasedCombat : MonoBehaviour
     public void OnPlayerAttack()
     {
         enemyFighter.TakeDamage(playerFighter.GetFishDamage());
-        Debug.Log("player did: " +  playerFighter.GetFishDamage() + " Damage" + " Enemy HP now: " + enemyFighter.fishData.Health);
+        _log.Info("player did: " +  playerFighter.GetFishDamage() + " Damage" + " Enemy HP now: " + enemyFighter.fishData.Health);
 
         if (enemyFighter.fishData.Health <= 0)
         {
@@ -201,19 +207,19 @@ public class TurnBasedCombat : MonoBehaviour
 
     public void OnPlayerWin()
     {
-        Debug.Log("Player Wins!");
+        _log.Info("Player Wins!");
         // Add additional win logic here (e.g., rewards, scene transition)
     }
 
     public void OnPlayerLose()
     {
-        Debug.Log("Player Lost!");
+        _log.Info("Player Lost!");
         // Add additional lose logic here (e.g., game over screen, restart)
     }
 
     public void OnEnemyTurn()
     {
-        Debug.Log("enemy turn starting");
+        _log.Info("enemy turn starting");
         // Start enemy attack sequence which includes the parry bar
         OnEnemyAttack();
     }

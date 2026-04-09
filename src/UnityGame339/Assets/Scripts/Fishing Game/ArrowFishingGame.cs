@@ -1,9 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Game339.Shared.Diagnostics;
+using Game.Runtime;
 
 public class ArrowFishingGame : MonoBehaviour
 {
+    private IGameLog _log;
     public GameObject upArrow;
     public GameObject downArrow;
     public GameObject leftArrow;
@@ -62,9 +65,9 @@ public class ArrowFishingGame : MonoBehaviour
         {
             pattern[i] = (ArrowState)Random.Range(0, 4);
         }
-        Debug.Log("Pattern generated: " + string.Join(", ", pattern));
+        _log.Info("Pattern generated: " + string.Join(", ", pattern));
         return pattern;
-        
+
     }
 
     private int GetRandomPatternLength()
@@ -75,17 +78,20 @@ public class ArrowFishingGame : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _log = ServiceResolver.Resolve<IGameLog>();
+        _log.Info("ArrowFishingGame initialized");
+
         clickAction = InputSystem.actions.FindAction("Click");
         rightClickAction = InputSystem.actions.FindAction("RightClick");
         moveAction = InputSystem.actions.FindAction("Move");
         jumpAction = InputSystem.actions.FindAction("Jump");
         fishingRod = GameObject.Find("Fishing Rod");
         fishingHook = GameObject.Find("Hook");
-        
-        
-        
-        
-        
+
+
+
+
+
     }
 
     // Update is called once per frame
@@ -117,7 +123,7 @@ public class ArrowFishingGame : MonoBehaviour
                         isCollectingInput = false;
                         bool isCorrect = ComparePatterns();
                         CatchFish();
-                        Debug.Log("Pattern " + (isCorrect ? "CORRECT!" : "INCORRECT!"));
+                        _log.Info("Pattern " + (isCorrect ? "CORRECT!" : "INCORRECT!"));
                     }
                 }
             }
@@ -128,13 +134,13 @@ public class ArrowFishingGame : MonoBehaviour
 
     void startArrowGame()
     {
-        
+        _log.Info("Arrow fishing game started");
         arrowPattern = GeneratePattern();
         HookEnabled(true);
         currentPatternIndex = 0;
         currentArrowState = arrowPattern[currentPatternIndex];
         StartCoroutine(FlashArrowPattern(arrowPattern));
-        
+
     }
 
     private void swapArrowSprite()
@@ -266,7 +272,7 @@ public class ArrowFishingGame : MonoBehaviour
         {
             // Add it to player inventory
             FishContainer.AddFishToPlayer(caughtFish);
-            Debug.Log($"You caught a {caughtFish.FishName}!");
+            _log.Info($"You caught a {caughtFish.FishName}!");
         }
 
         HookEnabled(false);
